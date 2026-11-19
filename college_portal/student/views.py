@@ -42,3 +42,30 @@ def student_form(request):
         })
 
     return render(request, 'student_form.html')
+
+def login_view(request):
+
+    if request.method == "POST":
+
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        if username and password:
+
+            return render(request, 'login.html', {
+                'success': True,
+                'username': username
+            })
+
+        else:
+            return render(request, 'login.html', {
+                'error': 'Please enter username and password'
+            })
+
+    return render(request, 'login.html')
+
+      
+
+
+def dashboard(request):
+    return render(request, 'dashboard.html')

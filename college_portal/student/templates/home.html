@@ -3,15 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>College Portal | Home</title>
+
+   
 </head>
+
 <body>
+
+<div class="container">
+
+    <div class="logo">C</div>
+
+    <h2 class="heading">Welcome to College Portal</h2>
+    <p class="subtitle">Student Information</p>
+
     <h1>Name: {{data.name}}</h1>
+
     <h1>Age: {{data.age}}</h1>
+
     <h1>Department: {{data.department}}</h1>
-    <h1>marks :</h1>
-    {%for m in marks%}
-    <h2>{{m}}</h2>
-    {%endfor%}
+
+    <h2 class="section-title">Student Marks</h2>
+
+    <div class="marks">
+        {% for m in marks %}
+        <div class="mark-card">
+            {{m}}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="footer">
+        © 2026 College Portal. All Rights Reserved.
+    </div>
+
+</div>
+
 </body>
 </html>
