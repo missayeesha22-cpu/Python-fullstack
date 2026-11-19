@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Form</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 15px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: 600;
+            color: #444;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 6px rgba(102,126,234,0.3);
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102,126,234,0.4);
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 18px;
+            background: #f0f8ff;
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+        }
+
+        .result h3 {
+            color: #444;
+            margin-bottom: 12px;
+        }
+
+        .result p {
+            margin: 8px 0;
+            color: #555;
+        }
+
+        .result strong {
+            color: #333;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Student Registration</h1>
+    <p class="subtitle">Enter your details below</p>
+
+    <form action="/add/" method="POST">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label>Registration Number</label>
+            <input type="text" name="reg_no"
+                   placeholder="Enter registration number" required>
+        </div>
+
+        <div class="form-group">
+            <label>Student Name</label>
+            <input type="text" name="name"
+                   placeholder="Enter your name" required>
+        </div>
+
+        <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" name="email"
+                   placeholder="Enter your email" required>
+        </div>
+
+        <div class="form-group">
+            <label>Marks</label>
+            <input type="number" name="marks"
+                   placeholder="Enter your marks"
+                   min="0" max="100" required>
+        </div>
+
+        <div class="form-group">
+            <label>Date of Birth</label>
+            <input type="date" name="dob" required>
+        </div>
+
+        <button type="submit">Submit Details</button>
+    </form>
+
+    {% if student %}
+    <div class="result">
+        <h3>Registration Successful!</h3>
+
+        <p><strong>Registration No:</strong> {{ student.reg_no }}</p>
+        <p><strong>Name:</strong> {{ student.name }}</p>
+        <p><strong>Email:</strong> {{ student.email }}</p>
+        <p><strong>Marks:</strong> {{ student.marks }}</p>
+        <p><strong>Date of Birth:</strong> {{ student.dob }}</p>
+    </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
