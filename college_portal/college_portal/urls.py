@@ -22,12 +22,17 @@ from student import views
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('home/', views.home),
-    path('about/', views.about),
-    path('contact/', views.contact),
+    # Normal pages
+    path('home/', views.home, name='home'),
+    path('about/', views.about, name='about'),
+    path('contact/', views.contact, name='contact'),
+    path('add/', views.student_form, name='student_form'),
 
-path('add/', views.form),
-path('student/', views.student_form),
-path('login/',views.login_view)
+    # Authentication pages
+    path('login/', views.login_view, name='login'),
+    path('dashboard/', views.dashboard, name='dashboard'),
+    path('logout/', views.logout_view, name='logout'),
+
+    # Student REST API
+    path('student/', views.student_api, name='student_api'),
 ]
-

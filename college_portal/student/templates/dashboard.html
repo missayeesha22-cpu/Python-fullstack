@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Dashboard</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f1f5f9;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #1e3a8a, #7c3aed);
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h2 {
+            font-size: 22px;
+        }
+
+        .logout-btn {
+            background: white;
+            color: #1e3a8a;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 60px auto;
+            padding: 20px;
+        }
+
+        .welcome-card {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .welcome-card h1 {
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+
+        .welcome-card p {
+            color: #64748b;
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+        .success {
+            color: green;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .dashboard-card {
+            background: white;
+            margin-top: 25px;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+
+        <h2>Student Management System</h2>
+
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="logout-btn">
+                Logout
+            </button>
+        </form>
+
+    </div>
+
+    <div class="container">
+
+        <div class="welcome-card">
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <h1>Welcome to Dashboard!</h1>
+
+            <p>
+                Login Successful!
+            </p>
+
+            <p>
+                Hello, {{ request.user.username }}.
+                Welcome to your Student Management System.
+            </p>
+
+        </div>
+
+        <div class="dashboard-card">
+
+            <h2>Dashboard</h2>
+
+            <p style="margin-top: 15px;">
+                You have successfully logged in to the system.
+            </p>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

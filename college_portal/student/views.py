@@ -1,5 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .models import student_table
+from .serializers import StudentSerializer
 # Create your views here.
 def home(request):
     data={
@@ -64,8 +68,40 @@ def login_view(request):
 
     return render(request, 'login.html')
 
-      
-
 
 def dashboard(request):
     return render(request, 'dashboard.html')
+
+def logout_view(request):
+    return render(request, 'logout.html')
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+
+from .models import student_table
+from .serializers import StudentSerializer
+
+
+@api_view(['GET', 'POST'])
+def student_api(request):
+
+    if request.method == 'GET':
+        students = student_table.objects.all()
+        serializer = StudentSerializer(students, many=True)
+        return Response(serializer.data)
+
+    elif request.method == 'POST':
+        serializer = StudentSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                serializer.data,
+                status=status.HTTP_201_CREATED
+            )
+
+        return Response(
+            serializer.errors,
+            status=status.HTTP_400_BAD_REQUEST
+        )
